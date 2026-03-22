@@ -941,27 +941,18 @@ def StarT_SerVer():
     for thread in threads:
         thread.join()
 
-# ============ نبض داخلي عشان ما ينام ============
-def keep_alive():
-    url = "https://tshakex.onrender.com"  # رابط الخدمة على Render
-    while True:
-        time.sleep(180)  # كل 3 دقائق
-        try:
-            requests.get(url, timeout=10)
-            print("💓 Ping sent")
-        except Exception as e:
-            print(f"⚠️ Ping failed: {e}")
+# ============ تشغيل البوت تلقائياً مع Flask ============
+def run_bot_in_background():
+    """تشغيل البوت في خلفية منفصلة"""
+    print("🚀 Starting Telegram bot in background...")
+    try:
+        bot.infinity_polling()
+    except Exception as e:
+        print(f"⚠️ Bot polling error: {e}")
+        time.sleep(5)
+        run_bot_in_background()
 
-# ============ نهاية النبض ============
-
-if __name__ == "__main__":
-    # شغل النبض الداخلي
-    threading.Thread(target=keep_alive, daemon=True).start()
-    
-    # شغل الحسابات
-    accounts_thread = threading.Thread(target=StarT_SerVer, daemon=True)
-    accounts_thread.start()
-    
-    # شغل التليجرام بـ polling
-    print("Bot started with polling...")
-    bot.infinity_polling()
+# تشغيل البوت في خيط منفصل (بدلاً من if __name__ == "__main__")
+bot_thread = threading.Thread(target=run_bot_in_background, daemon=True)
+bot_thread.start()
+print("✅ Telegram bot thread started")

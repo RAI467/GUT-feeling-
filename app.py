@@ -17,7 +17,7 @@ import logging
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)  
 
-TOKEN = "7687034509:AAHK8pW5rRV32OfCmVWSqICT7pdVcZz1ba4"
+TOKEN = "7687034509:AAEKvRbD3PSGzkZNbe0vAm-Nk-ywNZte8-U"
 ADMIN_IDS = [7813142772]
 
 from telebot import apihelper

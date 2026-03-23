@@ -58,6 +58,15 @@ WEBHOOK_URL = os.environ.get('WEBHOOK_URL', 'https://.hf.space')
 bot = telebot.TeleBot(TOKEN, parse_mode="HTML")
 app = Flask(__name__)
 
+# إزالة أي webhook قديم
+try:
+    bot.remove_webhook()
+    print("✅ Webhook removed")
+    time.sleep(1)
+except Exception as e:
+    print(f"⚠️ Error: {e}")
+
+
 connected_clients = {}
 connected_clients_lock = threading.Lock()
 

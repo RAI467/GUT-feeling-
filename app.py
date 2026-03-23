@@ -951,10 +951,14 @@ def StarT_SerVer():
         thread.join()
 
 if __name__ == "__main__":
+    # تشغيل Flask في الخلفية (عشان Render يكتشف المنفذ)
+    port = int(os.environ.get("PORT", 10000))
+    threading.Thread(target=lambda: app.run(host='0.0.0.0', port=port), daemon=True).start()
+    
     # شغل الحسابات
     accounts_thread = threading.Thread(target=StarT_SerVer, daemon=True)
     accounts_thread.start()
     
-    # شغل التليجرام بـ polling
+    # شغل البوت
     print("Bot started with polling...")
     bot.infinity_polling()

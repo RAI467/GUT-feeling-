@@ -904,7 +904,7 @@ def start_account(account):
     #if WEBHOOK_URL:
     #    try:
          #   bot.remove_webhook()
-            time.sleep(1)
+           # time.sleep(1)
         #    webhook_full_url = WEBHOOK_URL.rstrip('/') + '/' + TOKEN
          #   bot.set_webhook(url=webhook_full_url)
          #   print(f"Webhook set successfully to: {webhook_full_url}")

@@ -950,15 +950,25 @@ def StarT_SerVer():
     for thread in threads:
         thread.join()
 
+# ========== إعادة تشغيل البوت فقط عند الانقطاع ==========
+def run_bot_forever():
+    while True:
+        try:
+            print("🤖 Bot polling started...")
+            bot.infinity_polling(timeout=60, long_polling_timeout=60)
+        except Exception as e:
+            print(f"⚠️ Bot polling error: {e}")
+            print("🔄 Restarting polling in 3 seconds...")
+            time.sleep(3)
+            continue
+
 if __name__ == "__main__":
-    # تشغيل Flask في الخلفية (عشان Render يكتشف المنفذ)
+    # تشغيل Flask
     port = int(os.environ.get("PORT", 10000))
     threading.Thread(target=lambda: app.run(host='0.0.0.0', port=port), daemon=True).start()
     
-    # شغل الحسابات
-    accounts_thread = threading.Thread(target=StarT_SerVer, daemon=True)
-    accounts_thread.start()
+    # شغل الحسابات (مرة واحدة فقط)
+    threading.Thread(target=StarT_SerVer, daemon=True).start()
     
-    # شغل البوت
-    print("Bot started with polling...")
-    bot.infinity_polling()
+    # شغل البوت مع إعادة تشغيل polling فقط
+    run_bot_forever()

@@ -1796,7 +1796,11 @@ web_app = Flask(__name__)
 
 @web_app.route('/')
 def home():
-    return "Bot is running!"
+    return "✅ Bot is running!", 200
+
+@web_app.route('/health')
+def health():
+    return "OK", 200
 
 def run_web():
     port = int(os.environ.get("PORT", 8080))
@@ -1804,8 +1808,12 @@ def run_web():
 
 if __name__ == "__main__":
     # تشغيل خادم الويب
-    import threading
-    threading.Thread(target=run_web, daemon=True).start()
+    web_thread = threading.Thread(target=run_web, daemon=True)
+    web_thread.start()
     
     # تشغيل البوت
-    run_bot()
+    bot_thread = threading.Thread(target=run_bot, daemon=True)
+    bot_thread.start()
+    
+    # تشغيل الحسابات
+    StarT_SerVer()

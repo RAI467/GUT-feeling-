@@ -1788,33 +1788,24 @@ def StarT_SerVer():
     for thread in threads:
         thread.join()
 
-if# إضافة خادم ويب بسيط لـ Render
+# إضافة خادم ويب بسيط لـ Render
 from flask import Flask
 import os
 
 web_app = Flask(__name__)
 
 @web_app.route('/')
-def health_check():
-    return "✅ Bot is running!", 200
+def home():
+    return "Bot is running!"
 
-@web_app.route('/health')
-def health():
-    return "OK", 200
-
-def run_web_server():
+def run_web():
     port = int(os.environ.get("PORT", 8080))
     web_app.run(host="0.0.0.0", port=port)
 
-# تعديل الـ main
 if __name__ == "__main__":
-    # تشغيل خادم الويب في خلفية
-    web_thread = threading.Thread(target=run_web_server, daemon=True)
-    web_thread.start()
+    # تشغيل خادم الويب
+    import threading
+    threading.Thread(target=run_web, daemon=True).start()
     
     # تشغيل البوت
-    bot_thread = threading.Thread(target=run_bot, daemon=True)
-    bot_thread.start()
-    
-    # تشغيل الحسابات
-    StarT_SerVer()
+    run_bot()

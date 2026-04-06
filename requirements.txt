@@ -8,4 +8,5 @@ protobuf-decoder
 pycryptodome
 pyTelegramBotAPI
 gunicorn
-
+cryptography
+google

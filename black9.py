@@ -1,5 +1,3 @@
-# By AbdeeLkarim BesTo
-
 import requests , json , binascii , time , urllib3 , base64 , datetime , re ,socket , threading , random , os
 from protobuf_decoder.protobuf_decoder import Parser
 from Crypto.Cipher import AES
@@ -130,6 +128,7 @@ def Auth_Chat(idT, sq, K, V):
         }
     }
     return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '1215' , K , V)
+
 def xSendTeamMsg(msg, idT,  K, V):
     fields = {
     1: 1,
@@ -169,19 +168,19 @@ def xSendTeamMsg(msg, idT,  K, V):
 
 def spmroom(K, V, uid):
     fields = {
-        1: 22,     # ✅ مفتاح رقمي
-        2: {       # ✅ مفتاح رقمي
-            1: int(uid)  # ✅ مفتاح رقمي
+        1: 22,
+        2: {
+            1: int(uid)
         }
     }
     return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()), '0E15', K, V)
 
 def openroom(K, V):
     fields = {
-        1: 2,  # ✅ Integer key
-        2: {   # ✅ Integer key
-            1: 1,  # ✅ Integer key
-            2: 15, # ✅ Integer key
+        1: 2,
+        2: {
+            1: 1,
+            2: 15,
             3: 5,
             4: "SAD",
             5: "1",
@@ -277,9 +276,8 @@ def GenJoinSquadsPacket(code, key, iv):
     fields[2][9][8] = "1.111.1"
     fields[2][9][9] = 5
     fields[2][9][10] = 1
-    print(fields)
     return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()), '0515', key, iv)
-     #1750287629500765351_vfhkisb7hv 8679231987
+
 def ghost_pakcet(player_id , nm , secret_code , key ,iv):
     fields = {
         1: 61,
@@ -298,9 +296,53 @@ def ghost_pakcet(player_id , nm , secret_code , key ,iv):
                 },
                 9: 3,
             },
-            3: secret_code,},}
+            3: secret_code,
+        },
+    }
     return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()), '0515', key, iv)
-                                   
+
+def OpenCh(idT, code, K, V):
+    fields = {
+        1: 3,
+        2: {
+            1: idT,
+            3: "en",
+            4: str(code)
+        }
+    }
+    return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '1215' , K , V)
+
+def JoinSq(code, key, iv):
+    fields = {}
+    fields[1] = 4
+    fields[2] = {}
+    fields[2][4] = bytes.fromhex("01090a0b121920")
+    fields[2][5] = str(code)
+    fields[2][6] = 6
+    fields[2][8] = 1
+    fields[2][9] = {}
+    fields[2][9][2] = 800
+    fields[2][9][6] = 11
+    fields[2][9][8] = "1.111.1"
+    fields[2][9][9] = 5
+    fields[2][9][10] = 1
+    return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()), '0515', key, iv)
+
+def MsqSq(Msg , id , K , V):
+    fields = {1: id , 2: id , 4: Msg , 5: 1756580149, 7: 2, 8: 901048018, 9: {1: "MeRoBoT", 2: xBunnEr(), 4: 330, 5: 827001005, 8: "MeRoBoT", 10: 1, 11: 1, 13: {1: 2}, 14: {1: 1158053040, 2: 8, 3: "\u0010\u0015\b\n\u000b\u0015\f\u000f\u0011\u0004\u0007\u0002\u0003\r\u000e\u0012\u0001\u0005\u0006"}}, 10: "en", 13: {2: 2, 3: 1}}
+    Pk = (CrEaTe_ProTo(fields)).hex()
+    Pk = "080112" + EnC_Uid(len(Pk) // 2, Tp='Uid') + Pk
+    return GeneRaTePk(Pk, '1215', K, V)
+
+def ExitSq(id , K , V):
+    fields = {
+        1: 7,
+        2: {
+            1: int(11037044965)
+        }
+    }
+    return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '0515' , K , V)
+
 def _V(b, i):
     r = s = 0
     while True:
@@ -343,7 +385,6 @@ def GeT_KEy(obj , target):
                 collect(v)
     collect(obj)
     return values[-1] if values else None
- 
  
 def GeneRaTePk(Pk , N , K , V):
     PkEnc = EnC_PacKeT(Pk , K , V)
@@ -478,6 +519,39 @@ def DeApproved(user_id):
     user_id_encrypted = EnC_Uid(user_id , Tp = 'Uid')
     if user_id_encrypted in approve: approve.remove(user_id_encrypted) ; D(approvee , user_id) ; return True
     else: return False        
+    
+def GeTSQDaTa(dT):
+    try:
+        # طباعة هيكل البيانات للتحقق
+        print(f"DEBUG GeTSQDaTa: Keys in dT: {list(dT.keys())}")
+        
+        if '5' in dT and 'data' in dT['5']:
+            data_field = dT['5']['data']
+            print(f"DEBUG GeTSQDaTa: Keys in data_field: {list(data_field.keys())}")
+            
+            # استخراج البيانات
+            OwNer_UiD = data_field.get('1', {}).get('data') if '1' in data_field else None
+            SQuAD_CoDe = data_field.get('31', {}).get('data') if '31' in data_field else None
+            ChaT_CoDe = data_field.get('17', {}).get('data') if '17' in data_field else None
+            
+            # إذا كان الحقل 17 غير موجود، جرب الحقل 14 (سيكر كود)
+            if not ChaT_CoDe and '14' in data_field:
+                ChaT_CoDe = data_field['14'].get('data')
+            
+            print(f"DEBUG GeTSQDaTa extracted:")
+            print(f"  Owner UID from field 1: {OwNer_UiD}")
+            print(f"  Squad Code from field 31: {SQuAD_CoDe}")
+            print(f"  Chat Code from field 17: {ChaT_CoDe}")
+            
+            return OwNer_UiD, SQuAD_CoDe, ChaT_CoDe
+        
+        return None, None, None
+        
+    except Exception as e:
+        print(f"Error extracting squad data: {e}")
+        import traceback
+        traceback.print_exc()
+        return None, None, None
         
 def Show_Approvs():
     try: 

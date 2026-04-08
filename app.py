@@ -28,7 +28,7 @@ active_spam_lock = threading.Lock()
 
 app = Flask(__name__)
 
-BOT_TOKEN = "8582133732:AAEt0rLhmo0v2py1sI1F4fS4_8CKNfruJe8"
+BOT_TOKEN = "7687034509:AAFgsbvdT-sn3kePItSZS2qvM6XX0mmXhv0"
 bot = telebot.TeleBot(BOT_TOKEN)
 
 class SimpleAPI:

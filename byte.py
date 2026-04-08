@@ -1,4 +1,4 @@
-# By AbdeeLkarim BesTo
+# By fadai
 
 import requests , json , binascii , time , urllib3 , base64 , datetime , re ,socket , threading , random , os
 from protobuf_decoder.protobuf_decoder import Parser
@@ -115,7 +115,7 @@ def xBunnEr():
     return random.choice(bN)
 
 def xSEndMsg(Msg , Tp , Tp2 , id , K , V):
-    feilds = {1: id, 2: Tp2, 3: Tp, 4: Msg , 5: 1735129800, 7: 2, 9: {1: "xBesTo - C4­", 2: xBunnEr(), 3: 901048018, 4: 330, 5: 909034009, 8: "xBesTo - C4", 10: 1, 11: 1, 14: {1: 1158053040, 2: 8, 3: "\u0010\u0015\b\n\u000b\u0015\f\u000f\u0011\u0004\u0007\u0002\u0003\r\u000e\u0012\u0001\u0005\u0006"}}, 10: "en", 13: {2: 1, 3: 1}, 14: {}}
+    feilds = {1: id, 2: Tp2, 3: Tp, 4: Msg , 5: 1735129800, 7: 2, 9: {1: "fadai", 2: xBunnEr(), 3: 901048018, 4: 330, 5: 909034009, 8: "fadai", 10: 1, 11: 1, 14: {1: 1158053040, 2: 8, 3: "\u0010\u0015\b\n\u000b\u0015\f\u000f\u0011\u0004\u0007\u0002\u0003\r\u000e\u0012\u0001\u0005\u0006"}}, 10: "en", 13: {2: 1, 3: 1}, 14: {}}
     Pk = str(CrEaTe_ProTo(feilds).hex())
     Pk = "080112" + EnC_Uid(len(Pk) // 2 , Tp = 'Uid') + Pk
     return GeneRaTePk(str(Pk) , '1215' , K , V)
@@ -130,46 +130,59 @@ def Auth_Chat(idT, sq, K, V):
         }
     }
     return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '1215' , K , V)
-def xSendTeamMsg(msg, idT,  K, V):
-    fields = {
-    1: 1,
-    2: {
-        1: 12404281032,
-        2: idT,
-        4: msg,
-        7: 2,
-        10: "fr",
-        9: {
-            1: "C4 TEAM",
-            2: xBunnEr(),
-            4: 330,
-            5: 827001005,
-            8: "C4 TEAM",
-            10: 1,
-            11: 1,
-            12: {
-                1: 2
-            },
-            14: {
-                1: 1158053040,
-                2: 8,
-                3: "\u0010\u0015\b\n\u000b\u0015\f\u000f\u0011\u0004\u0007\u0002\u0003\r\u000e\u0012\u0001\u0005\u0006"
-            }
-        },
-        13: {
-            1: 2,
-            2: 1
-        },
-        14:{}
-    }
-}
     
-    return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '1215' , K , V)
-
 def OpEnSq(K , V):
     fields = {1: 1, 2: {2: "\u0001", 3: 1, 4: 1, 5: "en", 9: 1, 11: 1, 13: 1, 14: {2: 5756, 6: 11, 8: "1.111.5", 9: 2, 10: 4}}}
     return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '0515' , K , V)
 
+def spmroom(K, V, uid):
+    fields = {
+        1: 22,     
+        2: {       
+            1: int(uid)  
+        }
+    }
+    return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()), '0E15', K, V)
+
+def openroom(K, V):
+    fields = {
+        1: 2,  
+        2: {   
+            1: 1,  
+            2: 15, 
+            3: 5,
+            4: "fadai",
+            5: "1",
+            6: 12,
+            7: 1,
+            8: 1,
+            9: 1,
+            11: 1,
+            12: 2,
+            14: 36981056,
+            15: {
+                1: "IDC3",
+                2: 126,
+                3: "ME"
+            },
+            16: "\u0001\u0003\u0004\u0007\t\n\u000b\u0012\u000f\u000e\u0016\u0019\u001a \u001d",
+            18: 2368584,
+            27: 1,
+            34: "\u0000\u0001",
+            40: "en",
+            48: 1,
+            49: {
+                1: 21
+            },
+            50: {
+                1: 36981056,
+                2: 2368584,
+                5: 2
+            }
+        }
+    }
+    return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()), '0E15', K, V)
+    
 def cHSq(Nu , Uid , K , V):
     fields = {1: 17, 2: {1: int(Uid), 2: 1, 3: int(Nu - 1), 4: 62, 5: "\u001a", 8: 5, 13: 329}}
     return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '0515' , K , V)
@@ -196,23 +209,94 @@ def GeT_Status(PLayer_Uid , K , V):
     if len(PLayer_Uid) == 8: Pk = f'080112080a04{PLayer_Uid}1005'
     elif len(PLayer_Uid) == 10: Pk = f"080112090a05{PLayer_Uid}1005"
     return GeneRaTePk(Pk , '0f15' , K , V)
-           
+
+def SPMROOMZIX(Uid, Rm, Nm, K, V):
+    fields = {
+        1: 2,
+        2: {
+            1: 1,
+            2: 15,
+            3: 5,
+            4: Nm,  # الاسم
+            5: Rm,   # الباسورد (مفتاح)
+            6: 12,
+            7: 1,
+            8: 1,
+            9: 1,
+            11: 1,
+            12: 2,
+            14: int(Uid),
+            15: {
+                1: "IDC3",
+                2: 126,
+                3: "ME"
+            },
+            16: "\u0001\u0003\u0004\u0007\t\n\u000b\u0012\u000f\u000e\u0016\u0019\u001a \u001d",
+            18: int(Rm),
+            27: 1,
+            34: "\u0000\u0001",
+            40: "en",
+            48: 1,
+            49: {
+                1: 21
+            },
+            50: {
+                1: int(Uid),
+                2: int(Rm),
+                5: 2
+            }
+        }
+    }
+    return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()), '0E15', K, V)
+    
+def SPMR1(Uid, K, V):
+    fields = {
+        1: 22,
+        2: {
+            1: int(Uid)
+        }
+    }
+    return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()), '0E15', K, V)                          
+                                 
 def SPam_Room(Uid , Rm , Nm , K , V):
     fields = {1: 78, 2: {1: int(Rm), 2: f"[{ArA_CoLor()}]{Nm}", 3: {2: 1, 3: 1}, 4: 330, 5: 1, 6: 201, 10: xBunnEr(), 11: int(Uid), 12: 1}}
     return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '0e15' , K , V)
-
+    
+def CHangeRoomName(room_id, key, iv):
+    fields = {1: 13,2: {1: int(room_id),2: f"{GeneratRandomHexColor()}ZIX OFFICIAL",4: 1,5: 15,6: 8,7: 30,8: 1,9: 1,10: 2,11: 36981056,12: 2368584,13: 1,18: {0: 1},30: 1}}
+    packet = create_packet(fields).hex()
+    encrypted_packet = aes_encrypt(packet, key, iv)
+    hlen = len(encrypted_packet) // 2
+    return bytes.fromhex("0E15000000" + dec_to_hex(hlen) + encrypted_packet)
+    
 def Join_Room(room_id , K , V):
     fields = {1: 3, 2: {1: int(room_id), 8: {1: "IDC1", 2: 3000, 3: "ME"}, 9: "\x01\t\n\x12\x19 ", 10: 1, 12: b"\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01", 13: 3, 14: 3, 16: "ME"}}
     return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '0e10' , K , V)
 
-def SPamSq(bot_uid, Uid,K,V):
-    fields = {1: 33, 2: {1: int(Uid), 2: "ME", 3: 1, 4: 1, 6: "RedZedKing!!", 7: 330, 8: 1000, 9: 100, 10: "DZ", 12: 1, 13: int(Uid), 16: 1, 17: {2: 159, 4: "y[WW", 6: 11, 8: "1.118.1", 9: 3, 10: 1}, 18: 306, 19: 18, 24: 902000306, 26: {}, 27: {1: 11, 2: int(bot_uid), 3: 999}, 28: {}, 31: {1: 1, 2: 32768}, 32: 32768, 34: {1: bot_uid, 2: 8, 3: "\u0010\u0015\b\n\u000b\u0013\f\u000f\u0011\u0004\u0007\u0002\u0003\r\u000e\u0012\u0001\u0005\u0006"}}}
-    return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '0515' , K , V)
-
-
-def SPjamhhSq(Uid , K , V): 
+def SPamSq(Uid , K , V): 
     fields = {1: 33, 2: {1: int(Uid) , 2: 'ME', 3: 1, 4: 1, 7: 330, 8: 19459, 9: 100, 12: 1, 16: 1, 17: {2: 94, 6: 11, 8: '1.111.5', 9: 3, 10: 2}, 18: 201, 23: {2: 1, 3: 1}, 24: xBunnEr() , 26: {}, 28: {}}}
     return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '0515' , K , V)
+
+async def Emote_k(TarGeT , idT, K, V,region):
+    fields = {
+        1: 21,
+        2: {
+            1: 804266360,
+            2: 909000001,
+            5: {
+                1: TarGeT,
+                3: idT,
+            }
+        }
+    }
+    if region.lower() == "ind":
+        packet = '0514'
+    elif region.lower() == "bd":
+        packet = "0519"
+    else:
+        packet = "0515"
+    return await GeneRaTePk((await CrEaTe_ProTo(fields)).hex() , packet , K , V)
+
 
 def AccEpT(PLayer_Uid , AuTh_CodE_Sq , K , V): 
     fields = {1: 4, 2: {1: int(PLayer_Uid), 3: int(PLayer_Uid), 4: "\u0001\u0007\t\n\u0012\u0019\u001a ", 8: 1, 9: {2: 1393, 4: "wW_T", 6: 11, 8: "1.111.5", 9: 3, 10: 2}, 10: AuTh_CodE_Sq, 12: 1, 13: "en", 16: "OR"}}
@@ -235,26 +319,44 @@ def GenJoinSquadsPacket(code, key, iv):
     print(fields)
     return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()), '0515', key, iv)
      #1750287629500765351_vfhkisb7hv 8679231987
-def ghost_pakcet(player_id , nm , secret_code , key ,iv):
+
+def Zix(self, player_id, key, iv):
     fields = {
-        1: 61,
+        1: 5,
         2: {
-            1: int(player_id),  
-            2: {
-                1: int(player_id),  
-                2: 1159,  
-                3: f"[b][c][{ArA_CoLor()}]{nm}",  
-                5: 12,  
-                6: 15,
-                7: 1,
-                8: {
-                    2: 1,
-                    3: 1,
-                },
-                9: 3,
-            },
-            3: secret_code,},}
+            1: int(player_id),
+            2: 1,
+            3: int(player_id),
+            4: """[b][c][FF0000]▒█▀▀█ ░█▀█░ 　 """
+        }
+    }
+    return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()), '0515', key, iv)     
+
+def Zix1(self, player_id, key, iv):
+    fields = {
+        1: int(player_id),
+        2: 5,
+        4: 50,
+        5: {
+            1: int(player_id),
+            2: "[00FF00]ZIX BOT V1",
+            3: 1
+        }
+    }
     return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()), '0515', key, iv)
+     
+
+
+def Join_Room(room_id , K , V):
+    fields = {1: 3, 2: {1: int(room_id), 8: {1: "IDC1", 2: 3000, 3: "ME"}, 9: "\x01\t\n\x12\x19 ", 10: 1, 12: b"\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01", 13: 3, 14: 3, 16: "ME"}}
+    return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '0e10' , K , V)
+
+def SPamSq(bot_uid, Uid,K,V):
+    fields = {1: 33, 2: {1: int(Uid), 2: "ME", 3: 1, 4: 1, 6: "RedZedKing!!", 7: 330, 8: 1000, 9: 100, 10: "DZ", 12: 1, 13: int(Uid), 16: 1, 17: {2: 159, 4: "y[WW", 6: 11, 8: "1.118.1", 9: 3, 10: 1}, 18: 306, 19: 18, 24: 902000306, 26: {}, 27: {1: 11, 2: int(bot_uid), 3: 999}, 28: {}, 31: {1: 1, 2: 32768}, 32: 32768, 34: {1: bot_uid, 2: 8, 3: "\u0010\u0015\b\n\u000b\u0013\f\u000f\u0011\u0004\u0007\u0002\u0003\r\u000e\u0012\u0001\u0005\u0006"}}}
+    return GeneRaTePk(str(CrEaTe_ProTo(fields).hex()) , '0515' , K , V)
+
+
+
                                    
 def _V(b, i):
     r = s = 0
